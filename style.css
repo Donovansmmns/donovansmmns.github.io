@@ -1,6 +1,10 @@
 nav li a {
 	display: block;
 	display-color: #333;
+	position: far-right;
+}
+li a {
+    color: #666;
 }
 }
 a:link {
@@ -19,22 +23,20 @@ ul {
     padding: 0;
     width: 200px;
     background-color: #f1f1f1;
+	position: fixed;
 }
-
 li a {
     display: block;
-    color: #000;
     padding: 8px 16px;
-    text-decoration: none;
-	
+    text-decoration: none;	
 }
 li a:hover {
-    background-color: #f1f1f1;
-    color: gray;
+    background-color: #555;
+    color: red;
 }
 .active {
     background-color: #4CAF50;
-    color: white;
+    color: red;
 }
 ul {
     border: 1px solid #555;
@@ -45,9 +47,8 @@ li {
     border-bottom: 1px solid #555;
 }
 
-li:last-child {
-    border-bottom: none;
-}
+
+
 
 
 
