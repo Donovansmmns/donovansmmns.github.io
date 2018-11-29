@@ -1,0 +1,79 @@
+nav li a {
+	display: block;
+	display-color: #333;
+	position: far-right;
+}
+li a {
+    color: #666;
+}
+
+a:link {
+    text-decoration: none;
+}
+div. fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    border: 3px solid #73AD21;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+	position: fixed;
+}
+li a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;	
+}
+li a:hover {
+    background-color: #555;
+    color: red;
+}
+.active {
+    background-color: #222;
+    color: red;
+}
+ul {
+    border: 1px solid #555;
+}
+
+li {
+    text-align: center;
+    border-bottom: 1px solid #555;
+}
+
+
+
+
+
+
+
+
+
+body {
+	background-color: black;
+}
+body {
+background-image: url("background.jpg");
+}
+p {
+	color: red;
+}
+h1 {
+	color: red;
+	background-color: black;
+	text-align: center;
+	margin-left: 40%;
+	margin-right: 40%;
+}
+h1 {
+	border-top: solid;
+	border-bottom: solid;
+	border-left: dotted;
+	border-right: dotted;
+}
