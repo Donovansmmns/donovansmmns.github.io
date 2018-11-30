@@ -8,6 +8,9 @@ h1 {
 h2 {
     color: whitesmoke;
 }
+h3 {
+    color: whitesmoke;
+}
 p {
     color: whitesmoke;
 }
@@ -36,7 +39,6 @@ nav ul li a {
     padding: 14px 16px;
     text-decoration: none;
 }
-
 
 nav ul li a:hover {
     background-color: #111;
