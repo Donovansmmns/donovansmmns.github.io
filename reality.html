@@ -8,28 +8,37 @@
     <title>The Truth</title>
 </head>
 <style>
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dropdown-image {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    
+    .dropdown:hover .dropdown-image {
+        display: block;
+    }
+    
+    .desc {
+        padding: 15px;
+        text-align: center;
+    }
+    div.fixed {
+        position: fixed;
+        bottom: 0;
+        right: 0;
         
-        .dropdown-image {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
         
-        .dropdown:hover .dropdown-image {
-            display: block;
-        }
-        
-        .desc {
-            padding: 15px;
-            text-align: center;
-        }
+    }   
+
+
 </style>
 
 <body>
@@ -55,5 +64,9 @@
     
     <h2>So you can relax if you were at all worried!</h2>
     <p>We are really just a group of people sitting in a classroom. ☺</p>
+
+    <div class="fixed">
+        <img src="https://i.kym-cdn.com/entries/icons/facebook/000/009/086/SMILE.jpg" alt="Spongebob with a smirk">
+    </div>
 </body>
 </html> 
