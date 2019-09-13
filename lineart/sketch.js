@@ -15,5 +15,4 @@ function setup() {
 function draw() {
   line(mouseX, mouseY, pmouseX, pmouseY);
   
-
 }
