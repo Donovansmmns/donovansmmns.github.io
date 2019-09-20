@@ -2,39 +2,52 @@ let playerX;
 let playerY;
 let dy;
 let playerSize = 50;
+let state = "menu";
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   playerX = 100;
   playerY = height/2;
-  dy = 1;
+  dy = 0;
   
 }
 
   //Creates player
 function draw() {
   background(0);
-  displayRect();
+  if (mouseIsPressed) {
+    state = "game";
+  }
+  if (state === "menu") {
+    textAlign(CENTER, CENTER);
+    fill(255);
+    textSize(40);
+    text("Left Click to Fly!\nAvoid the obstacles to score points!\nIf you touch the ceiling or floor, you will also lose!", width/2, height/2);
+  }
+  else if (state = "game") {
+    displayRect();
+  }
 }
 
   //Updates canvas to keep player in center regardless of browser size
 function windowResized() {
   setup();
 }
-  //Momentum of player
-function moveShape(){
-  playerY += dy;
-}
 
-
-
+  //Spawns player
 function displayRect(){
   fill(255);
   rect(playerX, playerY, playerSize, playerSize);
-  playerY += dy;
-  dy += 0.07;
   
-  if (playerY > height - playerSize || playerY < 0){
-    dy *= 0;
+  //Gravity and upward momentum when clicking
+  playerY += dy;
+  dy += 0.4;
+  if (mouseIsPressed) {
+    if (mouseButton === LEFT) {
+      dy = -10;
+    }
+  }
+  if (playerY > height - playerSize - 9 || playerY < 0){
+    dy = 0;
   }
 }
