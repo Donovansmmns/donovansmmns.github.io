@@ -3,13 +3,15 @@ let playerY;
 let dy;
 let playerSize = 50;
 let state = "menu";
+let obstacleWidth = 25;
+let bottomObstacleHeight;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   playerX = 100;
   playerY = height/2;
   dy = 0;
-  
+  bottomObstacleHeight = height/2 - random(0, 50)
 }
 
   //Creates player
@@ -26,6 +28,7 @@ function draw() {
   }
   else if (state = "game") {
     displayRect();
+    displayBottomObstacle();
   }
 }
 
@@ -50,4 +53,9 @@ function displayRect(){
   if (playerY > height - playerSize - 9 || playerY < 0){
     dy = 0;
   }
+}
+
+function displayBottomObstacle(){
+  fill("red");
+  rect(width-100, bottomObstacleHeight, obstacleWidth, height);
 }
