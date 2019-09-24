@@ -11,7 +11,7 @@ function setup() {
   playerX = 100;
   playerY = height/2;
   dy = 0;
-  bottomObstacleHeight = height/2 - random(0, 50)
+  bottomObstacleHeight = height/2 - random(height/6 * -1, height/4)
 }
 
   //Creates player
