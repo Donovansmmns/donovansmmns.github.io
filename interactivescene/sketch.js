@@ -63,9 +63,8 @@ function displayRect(){
   if (playerY > height - playerSize - 9 || playerY < 0){
     dy = 0;
   }
-  if (playerX > (obstacleX + obstacleWidth)){
-    score += 1;
-  }
+  
+  
 }
   
   //Spawns obstacle making it have a random height, resets to original position with a new height if it passes the whole screen.
@@ -97,4 +96,8 @@ function displayScore(){
   fill(255);
   textSize(50);
   text(score, width-100, 50);
+  //Adds 1 point to the player's score
+  if (playerX > (obstacleX + obstacleWidth + 72)){
+    score += 1;
+  }
 }
