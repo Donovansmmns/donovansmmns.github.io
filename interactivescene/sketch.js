@@ -62,8 +62,17 @@ function displayRect(){
   //Ceiling and floor interaction stops player.
   if (playerY > height - playerSize - 9 || playerY < 0){
     dy = 0;
+    obstacleDX = 0;
   }
-  
+  //Game ends if player touches obstacle
+  if (playerX >= obstacleX || playerX + playerSize >= obstacleX){
+    if (playerY >= obstacleHeight || playerY + playerSize >= obstacleHeight){
+    dy = 0;
+    obstacleDX = 0;      
+    }
+
+    
+  }
   
 }
   
@@ -84,9 +93,22 @@ function keyTyped(){
     score = 0;
     obstacleX = width - 100;
     obstacleHeight = height/2 - random(height/6 * -1, height/4);
+    obstacleDX = -3;
     playerY = height/2;
     state = "menu";
 
+  }
+
+  //Work in progress, rarely counts towards player score because the x position does not pass the point needed within 60 frames and gravity shift needs extra variable.
+  if (key === "w"){
+    obstacleDX += -5.5;
+    dy += 5.5;
+  }
+  if (key === "s"){
+    if (obstacleDX < -1.5){
+      obstacleDX += 1.5;
+     dy += -5.5;      
+    }
   }
 }
  
@@ -96,8 +118,10 @@ function displayScore(){
   fill(255);
   textSize(50);
   text(score, width-100, 50);
+  
   //Adds 1 point to the player's score
   if (playerX > (obstacleX + obstacleWidth + 72)){
     score += 1;
   }
 }
+
