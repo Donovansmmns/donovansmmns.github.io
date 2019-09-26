@@ -6,14 +6,19 @@
 //Added function to adjust the game to work while resizing the window live.
 //Attempted to add sound effect but the preload never managed to load.
 
+//Player setup variables
 let playerX;
 let playerY;
 let playerSize = 50;
 let dy;
+
+//Obstacle setup variables
 let obstacleX;
 let obstacleDX;
 let obstacleWidth = 25;
 let obstacleHeight;
+
+//State & score variable.
 let state = "menu";
 let score = 0;
 let mySound;
@@ -44,7 +49,7 @@ function draw() {
     textAlign(CENTER, CENTER);
     fill(255);
     textSize(40);
-    text("Left Click to Fly!\nAvoid the obstacles to score points!\nIf you touch the ceiling, floor, or obstacles you will lose!\n\nLeft click to fly up!\nR to reset!\nW/S to change obstacle speed! (Still buggy though)", width/2, height/2);
+    text("Avoid the obstacles to score points!\nIf you touch the ceiling, floor, or obstacles you will lose!\n\nLeft click to fly up!\nR to reset!\nW/S to change obstacle speed! (Still buggy though)", width/2, height/2);
   }
   //Calls function for player, obstacles, and score.
   else if (state = "game") {
@@ -80,8 +85,9 @@ function displayRect(){
     textAlign(CENTER, TOP);
     fill(255);
     textSize(40);
-    text("Man oh man! You scored "+score+" points!", width/2, 100);  
+    text("Man oh man! You scored "+score+" point(s)!", width/2, 100);  
   }
+
   //Game ends if player touches obstacle.
   if (playerX >= obstacleX || playerX + playerSize >= obstacleX){
     if (playerY >= obstacleHeight || playerY + playerSize >= obstacleHeight){
@@ -90,12 +96,9 @@ function displayRect(){
     textAlign(CENTER, TOP);
     fill(255);
     textSize(40);
-    text("Man oh man! You scored "+score+" points!", width/2, 100);   
+    text("Man oh man! You scored "+score+" point(s)!", width/2, 100);   
     }
-
-    
-  }
-  
+  } 
 }
   
   //Spawns obstacle making it have a random height, resets to original position with a new height if it passes the whole screen.
@@ -118,7 +121,6 @@ function keyTyped(){
     obstacleDX = -10;
     playerY = height/2;
     state = "menu";
-
   }
 
   //Work in progress, rarely counts towards player score because the x position does not pass the point needed within 60 frames and gravity shift needs extra variable.
