@@ -4,7 +4,7 @@ let dx;
 let dy;
 let radius = 100;
 let rectSize = 100;
-let mode = "square";
+let state = "menu";
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -15,18 +15,49 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(255);
 
-
+  if (state === "menu"){
+    showMenu();
+    checkIfButtonClicked();
+  }
     //Bounces a square
-  if (mode === "square"){
+  if (state === "square"){
     displayRect();
+    moveShape()
   }
     //Bounces a circle
-  else if (mode === "circle"){
+  else if (state === "circle"){
     displayCircle();
+    moveShape()
    }  
 }
+
+  function showMenu(){
+    //show rect button
+    fill(255, 0, 0, 125);
+    rectMode(CENTER)
+    rect(width/2, height/2, 400, 150);
+    textAlign(CENTER, CENTER);
+    textSize(50);
+    fill(0);
+    text("Square", width/2, height/2 - 100)
+    
+
+  }
+
+
+function checkIfButtonClicked(){}
+  if (mouseIsPressed) {
+    //check for rectangle button
+    if (mouseX > width/2 - 200 && mouseX < width/2 +  200 && mouseY > height/2 - 75 && mouseY < height/2 + 75){
+      state = "square";
+    }
+    if (mouseX > width/2 - 200 && mouseX < width/2 +  200 && mouseY > height/2 - 175 && mouseY < height/2 + 175){
+      state = "circle";
+    }
+  }
+
 
 function windowResized() {
   setup();
