@@ -8,6 +8,8 @@ let obstacleWidth = 25;
 let obstacleHeight;
 let state = "menu";
 let score = 0;
+let mySound;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -16,7 +18,7 @@ function setup() {
   dy = 0;
   obstacleHeight = height/2 - random(height/6 * -1, height/4);
   obstacleX = width - 100;
-  obstacleDX = -3;
+  obstacleDX = -10;
 }
 
   //Begins game when clicking.
@@ -93,7 +95,7 @@ function keyTyped(){
     score = 0;
     obstacleX = width - 100;
     obstacleHeight = height/2 - random(height/6 * -1, height/4);
-    obstacleDX = -3;
+    obstacleDX = -10;
     playerY = height/2;
     state = "menu";
 
@@ -120,7 +122,7 @@ function displayScore(){
   text(score, width-100, 50);
   
   //Adds 1 point to the player's score
-  if (playerX > (obstacleX + obstacleWidth + 72)){
+  if (playerX > (obstacleX + obstacleWidth + 80)){
     score += 1;
   }
 }
