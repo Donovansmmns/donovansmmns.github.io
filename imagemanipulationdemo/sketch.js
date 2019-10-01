@@ -1,32 +1,49 @@
-let spongebob;
-let scalar =1;
-function preload() {
-  spongebob = loadImage("assets/spongebob.png");
+let clown;
+let filteredImage;
+function preload(){
+  clown = loadImage("assets/clown.png");
 }
-
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
+  filteredImage = makeGrayScale(clown);
 }
 
 function draw() {
   background(255);
 
-  if (keyIsPressed){
-    if (keyCode === UP_ARROW){
-      console.log("Up arrow pressed.");
-      scalar *= 1.02;
+  //imageMode(CENTER);
+  image(filteredImage, 0, 0);
+  filteredImage = makeGrayScale(clown);
+
+}
+
+function makeGrayScale(sourceImage){
+  let img = createImage(sourceImage.width, sourceImage.height);
+  
+  //load pixels so you can adjust them in the array
+  img.loadPixels();
+  sourceImage.loadPixels();
+
+  for (let x = 0; x<sourceImage.width; x++){
+    for (let y = 0; y < sourceImage.height; y++){
+      let p = sourceImage.get(x, y);
+
+      //apply filter
+      let r = red(p);
+      let g = green(p);
+      let b = blue(p);
+      let average = (r + g + b)/3;
+
+      if (dist(mouseX, mouseY, x, y) > 100){
+        img.set(x, y, color(average, average, average));
+      }
+      else{
+        img.set(x, y, color(r, g, b));
+      }
       
     }
-    else if (keyCode === DOWN_ARROW) {
-      console.log("Down arrow pressed.");
-      scalar /= 1.02;
   }
+  img.updatePixels();
+  return img;
 }
-  imageMode(CENTER);
-  image(spongebob, mouseX, mouseY, spongebob.width * scalar, spongebob.height * scalar);
-  
-}
-
-
