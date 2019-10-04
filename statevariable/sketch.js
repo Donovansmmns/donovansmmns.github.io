@@ -28,14 +28,19 @@ function draw(){
 }
 
 function startMenu(){
+    fill(255);
     
-        textAlign(CENTER, CENTER);
-        fill(0);
-        textSize(50);
-        text("Welcome to  \nTHE GAME.\n Enjoy it ☺", width/2, height/2)
+    rect(width/2-50, height/2 + 100, 100, 50)
 
-    if (mouseIsPressed){
-        state = "level";
+    textAlign(CENTER, CENTER);
+    fill(0);
+    textSize(50);
+    text("Welcome to  \nTHE GAME.\n Enjoy it ☺", width/2, height/2)
+    if (mouseX > width/2 - 50 && mouseX < width/2 + 50 && mouseY > height/2 + 50 && mouseY < height/2 + 100){
+        if (mouseIsPressed){
+            state = "level";
+
+        }
     }
 }
 
