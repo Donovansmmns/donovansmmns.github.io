@@ -5,6 +5,8 @@
 //Extra For Experts.
 let playerX;
 let playerY;
+let dx;
+let dy;
 let coinsCollected;
 
 let state = "start";
@@ -13,7 +15,10 @@ let level;
 
 function setup(){
     createCanvas(windowWidth, windowHeight);
-    
+    playerX = width/2;
+    playerY = height-100;
+    dx = 5;
+    dy = 5;
 } 
 
 function draw(){
@@ -25,18 +30,22 @@ function draw(){
         levelSelect();
     }
     levelOne();
+    player()
 }
 
 function startMenu(){
     fill(255);
-    
     rect(width/2-50, height/2 + 100, 100, 50)
+    textAlign(CENTER, CENTER);
+    fill(0);
+    textSize(40);
+    text("PLAY", width/2, height/2+125)
 
     textAlign(CENTER, CENTER);
     fill(0);
     textSize(50);
     text("Welcome to  \nTHE GAME.\n Enjoy it ☺", width/2, height/2)
-    if (mouseX > width/2 - 50 && mouseX < width/2 + 50 && mouseY > height/2 + 50 && mouseY < height/2 + 100){
+    if (mouseX > width/2 - 50 && mouseX < width/2 + 50 && mouseY > height/2 + 100 && mouseY < height/2 + 150){
         if (mouseIsPressed){
             state = "level";
 
@@ -72,6 +81,28 @@ function levelOne(){
         rect(width - 100, height - 250, 100, 25)
         rect(width - 400, height - 400, 50, 25);
         rect(width/2-50, height/2 - 50, 100, 25)
+    }
+}
+
+function player(){
+    if (state === "level 1"){
+        fill(0);
+        rect(playerX, playerY, 50, 100)
+        if (keyIsPressed){
+            if (key === "d"){
+                playerX += dx;
+            }
+        }
+        if (keyIsPressed){
+            if (key === "a"){
+                playerX -= dx;
+            }
+        }
+        if (keyIsPressed){
+            if (key === "w"){
+                playerY -= dy;
+            }
+        }
     }
 }
 
