@@ -11,7 +11,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(255);
   for (let i = 0; i<shapes.length; i++){
     shapes[i].y += shapes[i].dy;
 
@@ -26,7 +26,7 @@ function mousePressed(){
     x: mouseX,
     y: mouseY,
     radius: random(10, 50),
-    color: color(random(255), random(255), random(255), random(255)),
+    color: color(random(255), random(255), random(255)),
     dy: random(1, 20)
   };
 

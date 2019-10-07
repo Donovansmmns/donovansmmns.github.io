@@ -16,9 +16,9 @@ let level;
 function setup(){
     createCanvas(windowWidth, windowHeight);
     playerX = width/2;
-    playerY = height-100;
-    dx = 5;
-    dy = 5;
+    playerY = height-150;
+    dx = 9;
+    dy = 9;
 } 
 
 function draw(){
@@ -31,6 +31,7 @@ function draw(){
     }
     levelOne();
     player()
+    
 }
 
 function startMenu(){
@@ -81,6 +82,13 @@ function levelOne(){
         rect(width - 100, height - 250, 100, 25)
         rect(width - 400, height - 400, 50, 25);
         rect(width/2-50, height/2 - 50, 100, 25)
+        if (playerY < height-150){
+            dy -=0.3;
+            playerY -= dy;
+        }
+        if (playerY > height - 150){
+            dy = 9;
+        }
     }
 }
 
@@ -92,17 +100,18 @@ function player(){
             if (key === "d"){
                 playerX += dx;
             }
-        }
-        if (keyIsPressed){
-            if (key === "a"){
+            else if (key === "a"){
                 playerX -= dx;
             }
-        }
-        if (keyIsPressed){
-            if (key === "w"){
+            else if (key === "w"){
                 playerY -= dy;
             }
-        }
+            if (key === " "){
+                playerX = width/2;
+                playerY = height-150;
+                dy = 9;
+            }   
+        }   
     }
 }
 
