@@ -29,6 +29,7 @@ function draw(){
     else if (state === "level"){
         levelSelect();
     }
+    border();
     levelOne();
     player()
     
@@ -75,6 +76,15 @@ function levelSelect(){
     }
 }
 
+function border(){
+    if (playerX < 0){
+        playerX = 1;
+    }
+    if (playerX > width - 50){
+        playerX = width - 51;
+    }
+}
+
 function levelOne(){
     if (state === "level 1"){
         fill(0);
@@ -100,13 +110,13 @@ function player(){
             if (key === "d"){
                 playerX += dx;
             }
-            else if (key === "a"){
+            if (key === "a"){
                 playerX -= dx;
             }
-            else if (key === "w"){
+            if (key === "w"){
                 playerY -= dy;
             }
-            if (key === " "){
+            if (key === "r"){
                 playerX = width/2;
                 playerY = height-150;
                 dy = 9;
