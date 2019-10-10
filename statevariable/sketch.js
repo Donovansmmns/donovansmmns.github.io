@@ -100,7 +100,7 @@ function levelOne(){
 
 function player(){
     if (state === "level 1"){
-        fill(0);
+        fill("red");
         rect(playerX, playerY, 50, 100)
         if (keyIsPressed){
             if (key === "d"){
@@ -123,17 +123,17 @@ function player(){
 
 
 function gravity(){
-    if (playerY < height-150){
+    if (playerY < height-151){
         dy -=0.3;
         playerY -= dy;
     }
-    if (playerY > height - 150 || (!onPlatform1)){
+    if (playerY > height - 151 || (!onPlatform1())){
         dy = 9;
     }
 }
 
 function onPlatform1() {
-    if (playerY <= height - 350 && playerY >= 250 && playerX < width && playerX > width - 125){
+    if (playerX < width && playerX > width - 125 && playerY <= height - 300 && playerY >= height - 350){
         dy = 0;
     }
 }
