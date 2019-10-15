@@ -127,7 +127,7 @@ function gravity(){
         dy -=0.3;
         playerY -= dy;
     }
-    if (playerY > height - 151 || (!onPlatform1())){
+    if (playerY > height - 151 && (!onPlatform1())){
         dy = 9;
     }
 }
@@ -135,5 +135,6 @@ function gravity(){
 function onPlatform1() {
     if (playerX < width && playerX > width - 125 && playerY <= height - 300 && playerY >= height - 350){
         dy = 0;
+        return true
     }
 }
