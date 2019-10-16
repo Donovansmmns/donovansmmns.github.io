@@ -7,6 +7,9 @@ let playerX;
 let playerY;
 let dx;
 let dy;
+let movingUp = false;
+let movingLeft = false;
+let movingRight = false;
 let coinsCollected;
 
 let state = "start";
@@ -102,39 +105,60 @@ function player(){
     if (state === "level 1"){
         fill("red");
         rect(playerX, playerY, 50, 100)
-        if (keyIsPressed){
-            if (key === "d"){
-                playerX += dx;
-            }
-            if (key === "a"){
-                playerX -= dx;
-            }
-            if (key === "w"){
-                playerY -= dy;
-            }
-            if (key === "r"){
-                playerX = width/2;
-                playerY = height-150;
-                dy = 9;
-            }   
-        }   
+        if (movingUp) {
+            playerY -= 3;
+          }
+        if (movingLeft) {
+            playerX -= 5;
+          }
+        if (movingRight) {
+            playerX += 5;         
+        }
+        if (key === "r"){
+            playerX = width/2
+            playerY = height - 150;
+            dy = 0;
+        }
     }
 }
 
 
 function gravity(){
-    if (playerY < height-151){
+    if (playerY < height-151 ){
         dy -=0.3;
         playerY -= dy;
     }
-    if (playerY > height - 151 && (!onPlatform1())){
+    if (playerY > height - 151){
         dy = 9;
     }
 }
 
 function onPlatform1() {
-    if (playerX < width && playerX > width - 125 && playerY <= height - 300 && playerY >= height - 350){
+    if (playerX < width && playerX > width - 150 && playerY <= height - 300 && playerY >= height - 350){
         dy = 0;
-        return true
     }
 }
+
+  function keyPressed(){
+    if (key === "w"){
+      movingUp = true;
+    }
+    if (key === "a"){
+      movingLeft = true;
+    }
+    if (key === "d"){
+      movingRight = true;
+    }
+  }
+  
+  function keyReleased(){
+    if (key === "w"){
+      movingUp = false;
+    }
+    if (key === "a"){
+      movingLeft = false;
+    }
+    if (key === "d"){
+      movingRight = false;
+    }
+  }
