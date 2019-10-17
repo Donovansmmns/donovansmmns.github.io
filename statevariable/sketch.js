@@ -12,6 +12,7 @@ let movingLeft = false;
 let movingRight = false;
 let coinsCollected;
 
+let onPlatform = false;
 let state = "start";
 let level;
 
@@ -98,6 +99,7 @@ function levelOne(){
         rect(width - 400, height - 400, 50, 25);
         rect(width/2-50, height/2 - 50, 100, 25)
         
+        
     }
 }
 
@@ -107,6 +109,7 @@ function player(){
         rect(playerX, playerY, 50, 100)
         if (movingUp) {
             playerY -= 3;
+            // dy -= 3;
           }
         if (movingLeft) {
             playerX -= 5;
@@ -123,21 +126,35 @@ function player(){
 }
 
 
-function gravity(){
-    if (playerY < height-151 ){
-        dy -=0.3;
-        playerY -= dy;
+
+function onPlatform1() {
+    if (playerX < width && playerX > width - 150 && playerY <= height - 344 && playerY >= height - 350){
+        onPlatform = true;
     }
-    if (playerY > height - 151){
-        dy = 9;
+    
+    else if (playerX >= width - 450 && playerX <= width - 350 && playerY <= height - 400 && playerY >= height - 500){
+        onPlatform = true;
+    }
+    else {
+        onPlatform = false;
     }
 }
 
-function onPlatform1() {
-    if (playerX < width && playerX > width - 150 && playerY <= height - 300 && playerY >= height - 350){
+
+function gravity(){
+    if (onPlatform){
         dy = 0;
     }
+    else if (playerY < height-151 ){
+        dy -=0.3;
+        playerY -= dy;
+    }
+    if (playerY > height - 151 || onPlatform){
+        dy = 9; 
+    }
 }
+
+
 
   function keyPressed(){
     if (key === "w"){
