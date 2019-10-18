@@ -1,8 +1,10 @@
-//Interactive Scene Assignment.
+//State Variable Assignment.
 //Donovan Simmons.
-//Sept 25, 2019.
+//Oct 21, 2019.
 //
 //Extra For Experts.
+
+//Player variables for movement and spawn location.
 let playerX;
 let playerY;
 let dx;
@@ -10,13 +12,21 @@ let dy;
 let movingUp = false;
 let movingLeft = false;
 let movingRight = false;
-let coinsCollected;
 
-let onPlatform = false;
+//Variables for start menu, level select, level end, platform detection, and a bonus for coins the player has collected.
 let state = "start";
 let level;
+let end;
+let onPlatform = false;
+let star;
+let starscollected;
+//Loading images for platforms and end goal.
+function preload(){
+    end = loadImage("assets/end.png");
+    //star = loadImage("assets/star.png");
+}
 
-
+//Player spawn location and speed.
 function setup(){
     createCanvas(windowWidth, windowHeight);
     playerX = width/2;
@@ -25,6 +35,7 @@ function setup(){
     dy = 9;
 } 
 
+//Start menu which turns into a level select.
 function draw(){
     background(255);
     if (state === "start"){
@@ -35,12 +46,16 @@ function draw(){
     }
     border();
     levelOne();
-    player()
     onPlatform1();
+    
+    
+    player();
     gravity();
+
     
 }
 
+//Start screen to welcome players into game, when player clicks it turns into level select.
 function startMenu(){
     fill(255);
     rect(width/2-50, height/2 + 100, 100, 50)
@@ -61,6 +76,7 @@ function startMenu(){
     }
 }
 
+//Level select, player can choose any level and it will load corresponding level.
 function levelSelect(){
     if (state === "level"){
         fill(255);
@@ -72,16 +88,19 @@ function levelSelect(){
         text("LEVEL SELECT", width/2, height/11);
         text("01", width/4+55, height/5+15)
        
+        //Detection for player mouse clicking a certain level.
         if (mouseX <width/4+100 && mouseX > width/4 && mouseY < height/5+100 && mouseY > height/5){
             if (mouseIsPressed){
                 if (state === "level"){
                     state = "level 1"
                 }
             }
-        }  
+        }
+          
     }
 }
 
+//Prevents player from going off screen.
 function border(){
     if (playerX < 0){
         playerX = 1;
@@ -91,18 +110,22 @@ function border(){
     }
 }
 
+//If selected, loads level one with the image for the goal that was preloaded,
+//this is supposed to be the level players use to get used to the controls.
 function levelOne(){
     if (state === "level 1"){
         fill(0);
         rect(0, height-50, width, 50);
         rect(width - 100, height - 250, 100, 25)
         rect(width - 400, height - 400, 50, 25);
-        rect(width/2-50, height/2 - 50, 100, 25)
-        
+        rect(width/2-50, height/2 - 50, 100, 25);
+        //image(star, width-100, height - 350, 100, 100)
+        image(end, width/2 - 50, height/2 - 145, 100, 100)    
         
     }
 }
 
+//Loads player with set dimensions to begin with, checks if movement is detected and moves corresponding to direction player pressed.
 function player(){
     if (state === "level 1"){
         fill("red");
@@ -126,21 +149,29 @@ function player(){
 }
 
 
-
+//Level one platform detection, if player is on platform it will stop player from phasing through it.
 function onPlatform1() {
-    if (playerX < width && playerX > width - 150 && playerY <= height - 344 && playerY >= height - 350){
+    if (playerX < width && playerX > width - 150 && playerY <= height - 330 && playerY >= height - 350){
         onPlatform = true;
     }
     
     else if (playerX >= width - 450 && playerX <= width - 350 && playerY <= height - 400 && playerY >= height - 500){
         onPlatform = true;
     }
+    else if (playerX >= width/2 -100 && playerX <= width/2 + 50 && playerY <= height/2 - 125 && playerY >= height/2 - 150 ){
+        onPlatform = true;
+        if (key === " "){
+            state = "level";
+            playerX = width/2;
+            playerY = height-150;
+        }
+    }
     else {
         onPlatform = false;
     }
 }
 
-
+//Constant function to simulate gravity and pull player down when not on a platform.
 function gravity(){
     if (onPlatform){
         dy = 0;
@@ -155,7 +186,7 @@ function gravity(){
 }
 
 
-
+//Detects if key is pressed, activates variable to make player move.
   function keyPressed(){
     if (key === "w"){
       movingUp = true;
@@ -168,6 +199,7 @@ function gravity(){
     }
   }
   
+  //Detects if key is released, reverts the variable back to false, stopping character from moving that direction.
   function keyReleased(){
     if (key === "w"){
       movingUp = false;
