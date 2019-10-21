@@ -14,16 +14,17 @@ let movingLeft = false;
 let movingRight = false;
 
 //Variables for start menu, level select, level end, platform detection, and a bonus for coins the player has collected.
+let completedLevels = [];
+let levelIsDone;
 let state = "start";
 let level;
 let end;
 let onPlatform = false;
-let star;
-let starscollected;
+
 //Loading images for platforms and end goal.
 function preload(){
     end = loadImage("assets/end.png");
-    //star = loadImage("assets/star.png");
+
 }
 
 //Player spawn location and speed.
@@ -79,9 +80,19 @@ function startMenu(){
 //Level select, player can choose any level and it will load corresponding level.
 function levelSelect(){
     if (state === "level"){
-        fill(255);
+        for (let i = 0; i <= completedLevels.length; i++){
+            if (completedLevels[i] === "completed1"){
+                console.log("level " + completedLevels[i] + " is marked complete...");
+                levelIsDone = true;
+            }
+        }
+        if (levelIsDone === true){
+            fill(0,255,0)
+        }
+        else{
+            fill(255);
+        }
         rect(width/4, height/5, 100, 100)
-       
         textAlign(CENTER, TOP)
         fill(0);
         textSize(80);
@@ -93,6 +104,7 @@ function levelSelect(){
             if (mouseIsPressed){
                 if (state === "level"){
                     state = "level 1"
+
                 }
             }
         }
@@ -119,7 +131,6 @@ function levelOne(){
         rect(width - 100, height - 250, 100, 25)
         rect(width - 400, height - 400, 50, 25);
         rect(width/2-50, height/2 - 50, 100, 25);
-        //image(star, width-100, height - 350, 100, 100)
         image(end, width/2 - 50, height/2 - 145, 100, 100)    
         
     }
@@ -164,6 +175,7 @@ function onPlatform1() {
             state = "level";
             playerX = width/2;
             playerY = height-150;
+            completedLevels.push("completed1")
         }
     }
     else {
