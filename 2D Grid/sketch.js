@@ -46,15 +46,67 @@ function mousePressed() {
   }
 }
 
+function createEmptyGrid(){
+  let emptyGrid = [];
+  for (let x = 0; x < cols; x++){
+    emptyGrid.push([]);
+    for (let y = 0; y < rows; y++){
+      emptyGrid[x].push(0)
+    }
+    }
+    return emptyGrid;
+  }
+
+
+function update(){
+  let nextTurn = createEmptyGrid();
+
+  for (let x = 0; x < cols; x++){
+    for (let y = 0; y < rows; y++){
+      let neighbors = 0;
+      //loop around the neighbor spots...
+      for (let i = -1; i <= 1; i++){
+        for (let j = -1; j <= 1; j++){
+          //deal with edge cases
+          if (x+i >= 0 && x+i < cols && y+j >= 0 && y+j < rows){
+            neighbors += grid[y+j][x+i];
+          }
+        }
+      }
+      //don't count self as a neighbor
+      neighbors -= grid[y][x];
+
+      //apply rules!
+      if (grid[y][x] === 1){ //currently alive
+        if (neighbors === 2 || neighbors === 3){
+          nextTurn[y][x] = 1;
+        }
+        else {
+          nextTurn[y][x] = 0;
+        }
+      }
+      if (grid[y][x] === 0){//currently dead
+        if (neighbors === 3){
+          nextTurn[y][x] = 1;
+        }
+        else{
+          nextTurn[y][x] = 0;
+        }
+      }
+    }
+  }
+  grid = nextTurn;
+}
+
 function displayGrid(grid, rows, cols) {
   let cellSize = width / cols;
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       if (grid[y][x] === 0) {
-        fill(0);
+        fill(255);
       }
       else {
-        fill(255);
+        fill(0);
       }
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
@@ -79,16 +131,14 @@ function createRandom2dArray(cols, rows) {
 
 function keyTyped(){
   if (key === "c"){
-    for (let x = 0; x < cols; x++){
-      for (let y = 0; y < rows; y++){
-        if (grid[x][y] === 0){
-          grid[x][y] = 1;
-        }
-      }
-    }
+    grid = createEmptyGrid();
   }
   if (key === "r"){
     grid = createRandom2dArray(cols, rows);
+  }
+
+  if (key === " "){
+    update();
   }
 }
 // let grid = [];
