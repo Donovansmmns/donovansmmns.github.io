@@ -14,7 +14,7 @@ function setup() {
     createCanvas(windowWidth, windowWidth);
   }
   grid = createEmptyGrid(cols, rows);
-  grid[playerY][playerX] = 1;
+  grid[playerY][playerX] = "the guy";
 }
 
 function draw() {
@@ -50,7 +50,7 @@ function keyTyped() {
   }
 
   // put player back into grid
-  grid[playerY][playerX] = 1;
+  grid[playerY][playerX] = "the guy";
 }
 
 function createEmptyGrid() {
@@ -68,7 +68,10 @@ function displayGrid(grid, rows, cols) {
   let cellSize = width / cols;
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
-      if (y % 2 !== 0 && x % 2 !== 0){
+      if (y === playerY && x === playerX) {
+        fill("green");
+      }
+      else if (y % 2 !== 0 && x % 2 !== 0){
         fill(0);
       }
       else{
