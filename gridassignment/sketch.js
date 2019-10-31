@@ -6,8 +6,8 @@
 
 
 let grid;
-let rows = 10;
-let cols = 10 ;
+let rows = 17;
+let cols = 17;
 
 function setup() {
   if (windowWidth>windowHeight){
