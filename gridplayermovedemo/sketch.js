@@ -36,7 +36,7 @@ function keyTyped() {
   grid[playerY][playerX] = 0;
 
   // move the player
-  if (key === "w" && playerY > 0) {
+  if (key === "w" && playerY > 0 && grid[playerY - 1] !== 1) { //FIX THIS TO MAKE UNIT COLLISION
     playerY -= 1;
   }
   if (key === "s" && playerY < rows - 1) {
@@ -72,6 +72,7 @@ function displayGrid(grid, rows, cols) {
         fill("green");
       }
       else if (y % 2 !== 0 && x % 2 !== 0){
+        grid[y][x] = 1;
         fill(0);
       }
       else{
