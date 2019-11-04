@@ -36,7 +36,7 @@ function keyTyped() {
   grid[playerY][playerX] = 0;
 
   // move the player
-  if (key === "w" && playerY > 0 && grid[playerY - 1] !== 1) { //FIX THIS TO MAKE UNIT COLLISION
+  if (key === "w" && playerY > 0) { 
     playerY -= 1;
   }
   if (key === "s" && playerY < rows - 1) {
