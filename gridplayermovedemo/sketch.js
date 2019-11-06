@@ -39,17 +39,17 @@ function keyTyped() {
   // remove player from current spot
   grid[playerOneY][playerOneX] = 0;
 
-  // move the player
-  if (key === "w" && playerOneY > 0) { 
+  // move player one, checks if direction has obstacle ahead.
+  if (key === "w" && playerOneY > 0 && grid[playerOneY-1][playerOneX] !== 1) { 
     playerOneY -= 1;
   }
-  if (key === "s" && playerOneY < rows - 1) {
+  if (key === "s" && playerOneY < rows - 1 && grid[playerOneY+1][playerOneX] !== 1 ) {
     playerOneY += 1;
   }
-  if (key === "d" && playerOneX < cols - 1) {
+  if (key === "d" && playerOneX < cols - 1 && grid[playerOneY][playerOneX+1] !== 1) {
     playerOneX += 1;
   }
-  if (key === "a" && playerOneX > 0) {
+  if (key === "a" && playerOneX > 0 && grid[playerOneY][playerOneX-1] !== 1) {
     playerOneX -= 1;
   }
   // put player back into grid
@@ -63,17 +63,17 @@ function keyPressed(){
   // remove player from current spot
   grid[playerTwoY][playerTwoX] = 0;
 
-  // move the player
-  if (keyCode === UP_ARROW && playerTwoY > 0) { 
+  // move player two, checks if direction has obstacle ahead.
+  if (keyCode === UP_ARROW && playerTwoY > 0 && grid[playerTwoY-1][playerTwoX] !== 1) { 
     playerTwoY -= 1;
   }
-  if (keyCode === DOWN_ARROW && playerTwoY < rows - 1) {
+  if (keyCode === DOWN_ARROW && playerTwoY < rows - 1 && grid[playerTwoY+1][playerTwoX] !== 1) {
     playerTwoY += 1;
   }
-  if (keyCode === RIGHT_ARROW && playerTwoX < cols - 1) {
+  if (keyCode === RIGHT_ARROW && playerTwoX < cols - 1 && grid[playerTwoY][playerTwoX+1] !== 1) {
     playerTwoX += 1;
   }
-  if (keyCode === LEFT_ARROW && playerTwoX > 0) {
+  if (keyCode === LEFT_ARROW && playerTwoX > 0 && grid[playerTwoY][playerTwoX-1] !== 1) {
     playerTwoX -= 1;
   }
 
