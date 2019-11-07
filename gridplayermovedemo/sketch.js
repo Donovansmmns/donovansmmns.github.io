@@ -97,11 +97,14 @@ function displayGrid(grid, rows, cols) {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       if (y === playerOneY && x === playerOneX) {
-        fill("green");
+        fill("blue");
       }
       else if (y % 2 !== 0 && x % 2 !== 0){
         grid[y][x] = 1;
         fill(0);
+      }
+      else if (y === 0 && x === 2 || y === 2 && x === 0){
+        fill("gray");
       }
       else{
         fill(255);
@@ -111,7 +114,6 @@ function displayGrid(grid, rows, cols) {
         fill("red");
       }
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
-      
     }
   }
 }
