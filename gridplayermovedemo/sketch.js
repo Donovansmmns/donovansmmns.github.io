@@ -40,16 +40,16 @@ function keyTyped() {
   grid[playerOneY][playerOneX] = 0;
 
   // move player one, checks if direction has obstacle ahead.
-  if (key === "w" && playerOneY > 0 && grid[playerOneY-1][playerOneX] !== 1) { 
+  if (key === "w" && playerOneY > 0 && grid[playerOneY-1][playerOneX] !== 1 && grid[playerOneY-1][playerOneX] !== 2 ) { 
     playerOneY -= 1;
   }
-  if (key === "s" && playerOneY < rows - 1 && grid[playerOneY+1][playerOneX] !== 1 ) {
+  if (key === "s" && playerOneY < rows - 1 && grid[playerOneY+1][playerOneX] !== 1 && grid[playerOneY+1][playerOneX] !== 2) {
     playerOneY += 1;
   }
-  if (key === "d" && playerOneX < cols - 1 && grid[playerOneY][playerOneX+1] !== 1) {
+  if (key === "d" && playerOneX < cols - 1 && grid[playerOneY][playerOneX+1] !== 1 && grid[playerOneY][playerOneX+1] !== 2) {
     playerOneX += 1;
   }
-  if (key === "a" && playerOneX > 0 && grid[playerOneY][playerOneX-1] !== 1) {
+  if (key === "a" && playerOneX > 0 && grid[playerOneY][playerOneX-1] !== 1 && grid[playerOneY][playerOneX-1] !== 2) {
     playerOneX -= 1;
   }
   // put player back into grid
@@ -104,6 +104,7 @@ function displayGrid(grid, rows, cols) {
         fill(0);
       }
       else if (y === 0 && x === 2 || y === 2 && x === 0){
+        grid[y][x] = 2;
         fill("gray");
       }
       else{
