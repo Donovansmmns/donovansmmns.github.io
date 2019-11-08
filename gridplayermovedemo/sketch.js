@@ -17,13 +17,14 @@ function setup() {
     createCanvas(windowWidth, windowWidth);
   }
   grid = createEmptyGrid(cols, rows);
-  grid[playerOneY][playerOneX] = "guy one";
-  grid[playerTwoY][playerTwoX] = "guy two";
+  grid[playerOneY][playerOneX] = "player one";
+  grid[playerTwoY][playerTwoX] = "player two";
 }
 
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
+  playerOneBomb();
 }
 
 function windowResized() {
@@ -53,7 +54,7 @@ function keyTyped() {
     playerOneX -= 1;
   }
   // put player back into grid
-  grid[playerOneY][playerOneX] = "guy one";
+  grid[playerOneY][playerOneX] = "player one";
   
   // remove player from current spot
   grid[playerTwoY][playerTwoX] = 0;
@@ -78,7 +79,7 @@ function keyPressed(){
   }
 
   // put player back into grid
-  grid[playerTwoY][playerTwoX] = "guy two";
+  grid[playerTwoY][playerTwoX] = "player two";
 }
 
 function createEmptyGrid() {
@@ -103,12 +104,13 @@ function displayGrid(grid, rows, cols) {
         grid[y][x] = 1;
         fill(0);
       }
-      else if (y === 0 && x === 2 || y === 2 && x === 0){
-        grid[y][x] = 2;
-        fill("gray");
+      else if (y === 0 && x === 0 || y === 0 && x === 1 || y === 1 && x === 0 || y === 8 && x === 8 || y === 8 && x === 7 || y === 7 && x === 8){
+        grid[y][x] = "open space";
+        fill(255);
       }
       else{
-        fill(255);
+        grid[y][x] = "breakable object";  
+        fill("gray");
       }
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
       if (y === playerTwoY && x === playerTwoX){
@@ -117,4 +119,18 @@ function displayGrid(grid, rows, cols) {
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
   }
+}
+
+function playerOneBomb(){
+  let bomb = false;
+  if (key === " "){
+    bomb = true;
+    grid[playerOneY][playerOneX] = "bomb placed"
+    
+    if (key === "a" && playerOneX - 1 === "open space"){
+      playerOneX -= 1;
+      grid[playerOneY][playerOneX+1] = "bomb placed";
+    }
+  }
+ 
 }
