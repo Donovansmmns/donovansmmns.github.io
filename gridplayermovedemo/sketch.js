@@ -109,11 +109,11 @@ function displayGrid(grid, rows, cols) {
       }
       else if (y % 2 !== 0 && x % 2 !== 0){
         grid[y][x] = 1;
+        fill(0)
       }
       else if (y === 0 && x === 0 || y === 0 && x === 1 || y === 1 && x === 0 || y === 8 && x === 8 || y === 8 && x === 7 || y === 7 && x === 8){
         grid[y][x] = "open space";
         fill(255);
-        
       }
       else{
         grid[y][x] = "breakable object";  
