@@ -9,6 +9,13 @@ let playerOneY = 0;
 let playerTwoX = 8;
 let playerTwoY = 8;
 
+let wall;
+let breakable;
+
+function preload(){
+  wall = loadImage("assets/wall.png");
+  breakable = loadImage("assets/breakable_wall.png")
+}
 function setup() {
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
@@ -24,7 +31,7 @@ function setup() {
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
-  playerOneBomb();
+  
 }
 
 function windowResized() {
@@ -41,16 +48,16 @@ function keyTyped() {
   grid[playerOneY][playerOneX] = 0;
 
   // move player one, checks if direction has obstacle ahead.
-  if (key === "w" && playerOneY > 0 && grid[playerOneY-1][playerOneX] !== 1 && grid[playerOneY-1][playerOneX] !== 2 ) { 
+  if (key === "w" && playerOneY > 0 && grid[playerOneY-1][playerOneX] !== 1 && grid[playerOneY-1][playerOneX] !== "breakable object" ) { 
     playerOneY -= 1;
   }
-  if (key === "s" && playerOneY < rows - 1 && grid[playerOneY+1][playerOneX] !== 1 && grid[playerOneY+1][playerOneX] !== 2) {
+  if (key === "s" && playerOneY < rows - 1 && grid[playerOneY+1][playerOneX] !== 1 && grid[playerOneY+1][playerOneX] !== "breakable object") {
     playerOneY += 1;
   }
-  if (key === "d" && playerOneX < cols - 1 && grid[playerOneY][playerOneX+1] !== 1 && grid[playerOneY][playerOneX+1] !== 2) {
+  if (key === "d" && playerOneX < cols - 1 && grid[playerOneY][playerOneX+1] !== 1 && grid[playerOneY][playerOneX+1] !== "breakable object") {
     playerOneX += 1;
   }
-  if (key === "a" && playerOneX > 0 && grid[playerOneY][playerOneX-1] !== 1 && grid[playerOneY][playerOneX-1] !== 2) {
+  if (key === "a" && playerOneX > 0 && grid[playerOneY][playerOneX-1] !== 1 && grid[playerOneY][playerOneX-1] !== "breakable object") {
     playerOneX -= 1;
   }
   // put player back into grid
@@ -65,16 +72,16 @@ function keyPressed(){
   grid[playerTwoY][playerTwoX] = 0;
 
   // move player two, checks if direction has obstacle ahead.
-  if (keyCode === UP_ARROW && playerTwoY > 0 && grid[playerTwoY-1][playerTwoX] !== 1) { 
+  if (keyCode === UP_ARROW && playerTwoY > 0 && grid[playerTwoY-1][playerTwoX] !== 1 && grid[playerTwoY-1][playerTwoX] !== "breakable object") { 
     playerTwoY -= 1;
   }
-  if (keyCode === DOWN_ARROW && playerTwoY < rows - 1 && grid[playerTwoY+1][playerTwoX] !== 1) {
+  if (keyCode === DOWN_ARROW && playerTwoY < rows - 1 && grid[playerTwoY+1][playerTwoX] !== 1 && grid[playerTwoY+1][playerTwoX] !== "breakable object") {
     playerTwoY += 1;
   }
-  if (keyCode === RIGHT_ARROW && playerTwoX < cols - 1 && grid[playerTwoY][playerTwoX+1] !== 1) {
+  if (keyCode === RIGHT_ARROW && playerTwoX < cols - 1 && grid[playerTwoY][playerTwoX+1] !== 1 && grid[playerTwoY][playerTwoX+1] !== "breakable object") {
     playerTwoX += 1;
   }
-  if (keyCode === LEFT_ARROW && playerTwoX > 0 && grid[playerTwoY][playerTwoX-1] !== 1) {
+  if (keyCode === LEFT_ARROW && playerTwoX > 0 && grid[playerTwoY][playerTwoX-1] !== 1 && grid[playerTwoY][playerTwoX-1] !== "breakable object") {
     playerTwoX -= 1;
   }
 
@@ -102,11 +109,11 @@ function displayGrid(grid, rows, cols) {
       }
       else if (y % 2 !== 0 && x % 2 !== 0){
         grid[y][x] = 1;
-        fill(0);
       }
       else if (y === 0 && x === 0 || y === 0 && x === 1 || y === 1 && x === 0 || y === 8 && x === 8 || y === 8 && x === 7 || y === 7 && x === 8){
         grid[y][x] = "open space";
         fill(255);
+        
       }
       else{
         grid[y][x] = "breakable object";  
@@ -121,16 +128,4 @@ function displayGrid(grid, rows, cols) {
   }
 }
 
-function playerOneBomb(){
-  let bomb = false;
-  if (key === " "){
-    bomb = true;
-    grid[playerOneY][playerOneX] = "bomb placed"
-    
-    if (key === "a" && playerOneX - 1 === "open space"){
-      playerOneX -= 1;
-      grid[playerOneY][playerOneX+1] = "bomb placed";
-    }
-  }
- 
-}
+
