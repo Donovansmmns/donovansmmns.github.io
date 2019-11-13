@@ -1,5 +1,6 @@
 // WASD in Grid Demo
 
+//Settings for grid, player coordinates, images for aesthetic (doesn't work).
 let grid;
 let rows = 9;
 let cols = 9;
@@ -8,14 +9,20 @@ let playerOneY = 0;
 
 let playerTwoX = 8;
 let playerTwoY = 8;
+let cellSize;
 
 let wall;
 let breakable;
+let bomb;
 
+//Preloads images for aesthetic, only bomb works.
 function preload(){
   wall = loadImage("assets/wall.png");
   breakable = loadImage("assets/breakable_wall.png")
+  bomb = loadImage("assets/bomb.jpg")
 }
+
+//Sets grid dimensions and player location.
 function setup() {
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
@@ -26,14 +33,18 @@ function setup() {
   grid = createEmptyGrid(cols, rows);
   grid[playerOneY][playerOneX] = "player one";
   grid[playerTwoY][playerTwoX] = "player two";
+  cellSize = width / cols;
 }
 
+//Draws grid, players, bombs
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
-  playerOneBomb()
+  playerOneBomb();
+  playerTwoBomb();
 }
 
+//Adjusts grid to window size.
 function windowResized() {
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
@@ -43,8 +54,9 @@ function windowResized() {
   }
 }
 
+//Function to move player one through the grid, stops if at a wall or border.
 function keyTyped() {
-  // remove player from current spot
+  // remove player from current spot.
   grid[playerOneY][playerOneX] = 0;
 
   // move player one, checks if direction has obstacle ahead.
@@ -60,15 +72,13 @@ function keyTyped() {
   if (key === "a" && playerOneX > 0 && grid[playerOneY][playerOneX-1] !== "unbreakable wall" && grid[playerOneY][playerOneX-1] !== "breakable object") {
     playerOneX -= 1;
   }
-  // put player back into grid
+  // put player back into grid.
   grid[playerOneY][playerOneX] = "player one";
-  
-  // remove player from current spot
-  grid[playerTwoY][playerTwoX] = 0;
 }
 
+//Function to move player two through the grid with arrow keys, stops if at a wall or border.
 function keyPressed(){
-  // remove player from current spot
+  // remove player from current spot.
   grid[playerTwoY][playerTwoX] = 0;
 
   // move player two, checks if direction has obstacle ahead.
@@ -85,10 +95,11 @@ function keyPressed(){
     playerTwoX -= 1;
   }
 
-  // put player back into grid
+  // put player back into grid.
   grid[playerTwoY][playerTwoX] = "player two";
 }
 
+//Creates 2d array.
 function createEmptyGrid() {
   let emptyGrid = [];
   for (let x = 0; x < cols; x++) {
@@ -100,6 +111,7 @@ function createEmptyGrid() {
   return emptyGrid;
 }
 
+//Displays the grid, makes starting zone for each player, breakable walls, and non-breakable walls.
 function displayGrid(grid, rows, cols) {
   let cellSize = width / cols;
   for (let y = 0; y < rows; y++) {
@@ -117,7 +129,8 @@ function displayGrid(grid, rows, cols) {
       }
       else{
         grid[y][x] = "breakable object";  
-        fill("gray");
+        // image(breakable, x * cellSize, y * cellSize, cellSize, cellSize)
+        fill("gray")
       }
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
       if (y === playerTwoY && x === playerTwoX){
@@ -128,13 +141,24 @@ function displayGrid(grid, rows, cols) {
   }
 }
 
+//Places a bomb at player one's location, unfinished. Bomb disappears after a key is pressed and doesn't do anything.
 function playerOneBomb(){
+  let bombX = cellSize * playerOneX;
+  let bombY = cellSize * playerOneY;
+  let bombPlanted = false;
   if (key === " "){
-    grid[playerOneY][playerOneX] = "bomb placed";
-  }
-  if (grid[playerOneY][playerOneX] === "bomb placed"){
-    if (key === "a"){
-      grid[playerOneY][playerOneX+1] = "bomb placed";
+    bombPlanted = true;
+    if (bombPlanted = true){
+      grid[playerOneY][playerOneX] = image(bomb, bombX, bombY, cellSize, cellSize);
     }
+  }
+}
+
+//Places a bomb at player two's location, unfinished. Bomb disappears after a key is pressed and doesn't do anything.
+function playerTwoBomb(){
+  let bombX = cellSize * playerTwoX;
+  let bombY = cellSize * playerTwoY;
+  if (keyCode === ENTER){
+    grid[playerTwoY][playerTwoX] = image(bomb, bombX, bombY, cellSize, cellSize)
   }
 }
