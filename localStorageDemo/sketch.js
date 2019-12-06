@@ -5,8 +5,8 @@ let allTimeHighestClicks;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  if (getItem("allTimeHighestClicks") !== null){
-    allTimeHighestClicks = getItem("highestClicks")
+  if (getItem("highestClicks") !== null){
+    allTimeHighestClicks = getItem("highestClicks");
   }
   else{
     allTimeHighestClicks = 0;
